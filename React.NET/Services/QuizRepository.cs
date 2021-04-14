@@ -3,7 +3,6 @@ using React.NET.Helpers;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
 
 namespace React.NET.Services
 {
@@ -104,5 +103,33 @@ namespace React.NET.Services
                         .Where(b => b.QuestionId == questionId).ToList();
         }
 
+        public void SaveUserEntryForQuestion(Entry entry)
+        {
+            if (entry.Id == null)
+            {
+                entry.Id = Guid.NewGuid();
+            }
+            _context.Entries.Add(entry);
+        }
+
+        public void CreateNewUser(User user)
+        {
+            if (user.Id == null)
+            {
+                user.Id = Guid.NewGuid();
+            }
+            _context.Users.Add(user);
+        }
+
+        public int CalculateScoreForQuiz(Guid userId)
+        {
+            var entries = _context.Entries.Where(b => b.UserId == userId).Select(b => b.Correct);
+            return entries.Count();
+        }
+
+        public bool Save()
+        {
+            return (_context.SaveChanges() >= 0);
+        }
     }
 }
