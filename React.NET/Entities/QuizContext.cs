@@ -7,7 +7,7 @@ namespace React.NET.Entities
         public QuizContext(DbContextOptions<QuizContext> options)
            : base(options)
         {
-            Database.EnsureCreated();
+            //Database.EnsureCreated();
         }
 
         public DbSet<Answer> Answers { get; set; }
@@ -21,6 +21,10 @@ namespace React.NET.Entities
             modelBuilder.Entity<Entry>().ToTable("Entry");
             modelBuilder.Entity<User>().ToTable("User");
             modelBuilder.Entity<Question>().ToTable("Question");
+
+            modelBuilder.Entity<User>()
+                .HasIndex(u => u.Username)
+                .IsUnique();
         }
     }
 }

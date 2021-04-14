@@ -23,7 +23,7 @@ namespace React.NET.Helpers
             }
         }
 
-        public string Genre { get; set; }
+        public string QuestionText { get; set; }
 
         public string SearchQuery { get; set; }
         
