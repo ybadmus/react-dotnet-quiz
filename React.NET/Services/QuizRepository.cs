@@ -6,7 +6,7 @@ using System.Linq;
 
 namespace React.NET.Services
 {
-    public class QuizRepository
+    public class QuizRepository : IQuizRepository
     {
         private QuizContext _context;
 
