@@ -112,13 +112,17 @@ namespace React.NET.Services
             _context.Entries.Add(entry);
         }
 
-        public void CreateNewUser(User user)
+        public Guid CreateNewUser(User user)
         {
-            if (user.Id == null)
-            {
-                user.Id = Guid.NewGuid();
-            }
+            user.Id = Guid.NewGuid();
             _context.Users.Add(user);
+            return user.Id;
+        }
+
+        public Guid LoginUserWithUsername(String username)
+        {
+            return _context.Users
+                .Where(u => u.Username == username).FirstOrDefault().Id;
         }
 
         public int CalculateScoreForQuiz(Guid userId)
