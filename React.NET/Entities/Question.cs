@@ -11,7 +11,7 @@ namespace React.NET.Entities
 
         [Required]
         [MaxLength(500)]
-        public string Text { get; set; }
+        public string QuestionText { get; set; }
 
         public ICollection<Answer> Answers { get; set; }
            = new List<Answer>();

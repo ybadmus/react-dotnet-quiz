@@ -22,6 +22,6 @@ namespace React.NET.Entities
 
         public Guid UserId { get; set; }
 
-        public string Result { get; set; }
+        public bool Correct { get; set; }
     }
 }

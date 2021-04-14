@@ -9,12 +9,12 @@ namespace React.NET.Entities
         [Key]
         public Guid Id { get; set; }
 
-        [ForeignKey("AuthorId")]
+        [ForeignKey("QuestionId")]
         public Question Question { get; set; }
 
         public Guid QuestionId { get; set; }
 
         [MaxLength(500)]
-        public string Text { get; set; }
+        public string AnswerText { get; set; }
     }
 }
