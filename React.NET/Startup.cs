@@ -1,9 +1,11 @@
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.SpaServices.ReactDevelopmentServer;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using React.NET.Entities;
 
 namespace React.NET
 {
@@ -21,6 +23,9 @@ namespace React.NET
         {
 
             services.AddControllersWithViews();
+
+            services.AddDbContext<QuizContext>(options =>
+                options.UseNpgsql(Configuration.GetConnectionString("quizDBConnectionString")));
 
             // In production, the React files will be served from this directory
             services.AddSpaStaticFiles(configuration =>
