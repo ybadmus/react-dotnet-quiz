@@ -78,6 +78,7 @@ namespace React.NET
                 cfg.CreateMap<Models.QuestionForCreationDto, Entities.Question>();
                 cfg.CreateMap<Entities.PossibleAnswer, Models.PossibleAnswerDto>();
                 cfg.CreateMap<Models.EntryForCreationDto, Entities.Entry>();
+                cfg.CreateMap<Models.UserForCreationDto, Entities.User>();
             });
 
             quizContext.EnsureSeedDataForContext();

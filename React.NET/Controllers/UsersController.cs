@@ -10,25 +10,25 @@ using React.NET.Services;
 
 namespace React.NET.Controllers
 {
-    [Route("api/Entry")]
-    public class EntryController : Controller
+    [Route("api/Users")]
+    public class UsersController : Controller
     {
         private IQuizRepository _quizRepository;
-        public EntryController(IQuizRepository quizRepository)
+        public UsersController(IQuizRepository quizRepository)
         {
             _quizRepository = quizRepository;
         }
 
-        [HttpPost("SaveEntry", Name = "SaveEntry")]
-        public IActionResult SaveEntry([FromBody]EntryForCreationDto entry)
+        [HttpPost("CreateUser", Name = "CreateUser")]
+        public IActionResult CreateUser([FromBody] UserForCreationDto username)
         {
-            var repoEntry = Mapper.Map<Entry>(entry);
+            var repoUser = Mapper.Map<User>(username);
 
-            _quizRepository.SaveEntryForQuestion(repoEntry);
+            _quizRepository.CreateUser(repoUser);
 
             if (!_quizRepository.Save())
             {
-                throw new Exception($"Creating entry failed on save.");
+                throw new Exception($"Creating user failed on save.");
             }
 
             return Ok();

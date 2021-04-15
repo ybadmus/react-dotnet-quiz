@@ -119,7 +119,7 @@ namespace React.NET.Services
             _context.Entries.Add(entry);
         }
 
-        public Guid CreateNewUser(User user)
+        public Guid CreateUser(User user)
         {
             if (user.Id == null)
             {
