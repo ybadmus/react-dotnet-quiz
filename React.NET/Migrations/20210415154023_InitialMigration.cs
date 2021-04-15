@@ -91,12 +91,6 @@ namespace React.NET.Migrations
                 name: "IX_PossibleAnswer_QuestionId",
                 table: "PossibleAnswer",
                 column: "QuestionId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_User_Username",
-                table: "User",
-                column: "Username",
-                unique: true);
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)

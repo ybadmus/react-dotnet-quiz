@@ -10,7 +10,7 @@ using React.NET.Entities;
 namespace React.NET.Migrations
 {
     [DbContext(typeof(QuizContext))]
-    [Migration("20210415011306_InitialMigration")]
+    [Migration("20210415154023_InitialMigration")]
     partial class InitialMigration
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -95,9 +95,6 @@ namespace React.NET.Migrations
                         .HasMaxLength(50);
 
                     b.HasKey("Id");
-
-                    b.HasIndex("Username")
-                        .IsUnique();
 
                     b.ToTable("User");
                 });

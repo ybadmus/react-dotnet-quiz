@@ -94,9 +94,6 @@ namespace React.NET.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("Username")
-                        .IsUnique();
-
                     b.ToTable("User");
                 });
 
