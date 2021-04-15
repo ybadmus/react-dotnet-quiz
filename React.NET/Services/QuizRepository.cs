@@ -20,16 +20,16 @@ namespace React.NET.Services
             question.Id = Guid.NewGuid();
             _context.Questions.Add(question);
 
-            if (question.Answers.Any())
+            if (question.PossibleAnswers.Any())
             {
-                foreach (var answer in question.Answers)
+                foreach (var answer in question.PossibleAnswers)
                 {
                     answer.Id = Guid.NewGuid();
                 }
             }
         }
 
-        public void AddAnswerToQuestion(Guid questionId, Answer answer)
+        public void AddAnswerToQuestion(Guid questionId, PossibleAnswer answer)
         {
             var question = GetQuestion(questionId);
             if (question != null)
@@ -38,7 +38,7 @@ namespace React.NET.Services
                 {
                     answer.Id = Guid.NewGuid();
                 }
-                question.Answers.Add(answer);
+                question.PossibleAnswers.Add(answer);
             }
         }
 
@@ -52,9 +52,9 @@ namespace React.NET.Services
             _context.Questions.Remove(question);
         }
 
-        public void DeleteAnswer(Answer answer)
+        public void DeleteAnswer(PossibleAnswer answer)
         {
-            _context.Answers.Remove(answer);
+            _context.PossibleAnswers.Remove(answer);
         }
 
         public Question GetQuestion(Guid questionId)
@@ -69,10 +69,10 @@ namespace React.NET.Services
 
             if (!string.IsNullOrEmpty(questionsResourceParameters.QuestionText))
             {
-                var genreForWhereClause = questionsResourceParameters.QuestionText
+                var questionForWhereClause = questionsResourceParameters.QuestionText
                     .Trim().ToLowerInvariant();
                 collectionBeforePaging = collectionBeforePaging
-                    .Where(a => a.QuestionText.ToLowerInvariant() == genreForWhereClause);
+                    .Where(a => a.QuestionText.ToLowerInvariant() == questionForWhereClause);
             }
 
             if (!string.IsNullOrEmpty(questionsResourceParameters.SearchQuery))
@@ -89,17 +89,17 @@ namespace React.NET.Services
                 questionsResourceParameters.PageSize);
         }
 
-        public Answer GetAnswerForQuestion(Guid questionId, Guid answerId)
+        public PossibleAnswer GetAnswerForQuestion(Guid questionId, Guid answerId)
         {
-            var answers = _context.Answers
+            var PossibleAnswers = _context.PossibleAnswers
               .Where(b => b.QuestionId == questionId && b.Id == answerId).FirstOrDefault();
 
-            return answers;
+            return PossibleAnswers;
         }
 
-        public IEnumerable<Answer> GetAnswersForQuestion(Guid questionId)
+        public IEnumerable<PossibleAnswer> GetPossibleAnswersForQuestion(Guid questionId)
         {
-            return _context.Answers
+            return _context.PossibleAnswers
                         .Where(b => b.QuestionId == questionId).ToList();
         }
 

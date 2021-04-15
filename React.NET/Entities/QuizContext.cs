@@ -10,7 +10,6 @@ namespace React.NET.Entities
             //Database.EnsureCreated();
         }
 
-        public DbSet<Answer> Answers { get; set; }
         public DbSet<Entry> Entries { get; set; }
         public DbSet<Question> Questions { get; set; }
         public DbSet<User> Users { get; set; }
@@ -18,7 +17,6 @@ namespace React.NET.Entities
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<Answer>().ToTable("Answer");
             modelBuilder.Entity<Entry>().ToTable("Entry");
             modelBuilder.Entity<User>().ToTable("User");
             modelBuilder.Entity<Question>().ToTable("Question");

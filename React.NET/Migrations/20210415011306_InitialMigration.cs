@@ -32,18 +32,19 @@ namespace React.NET.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Answer",
+                name: "PossibleAnswer",
                 columns: table => new
                 {
                     Id = table.Column<Guid>(nullable: false),
                     QuestionId = table.Column<Guid>(nullable: false),
-                    AnswerText = table.Column<string>(maxLength: 500, nullable: true)
+                    PossibleAnswerText = table.Column<string>(nullable: true),
+                    Answer = table.Column<bool>(nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Answer", x => x.Id);
+                    table.PrimaryKey("PK_PossibleAnswer", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Answer_Question_QuestionId",
+                        name: "FK_PossibleAnswer_Question_QuestionId",
                         column: x => x.QuestionId,
                         principalTable: "Question",
                         principalColumn: "Id",
@@ -77,11 +78,6 @@ namespace React.NET.Migrations
                 });
 
             migrationBuilder.CreateIndex(
-                name: "IX_Answer_QuestionId",
-                table: "Answer",
-                column: "QuestionId");
-
-            migrationBuilder.CreateIndex(
                 name: "IX_Entry_QuestionId",
                 table: "Entry",
                 column: "QuestionId");
@@ -90,6 +86,11 @@ namespace React.NET.Migrations
                 name: "IX_Entry_UserId",
                 table: "Entry",
                 column: "UserId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_PossibleAnswer_QuestionId",
+                table: "PossibleAnswer",
+                column: "QuestionId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_User_Username",
@@ -101,16 +102,16 @@ namespace React.NET.Migrations
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "Answer");
-
-            migrationBuilder.DropTable(
                 name: "Entry");
 
             migrationBuilder.DropTable(
-                name: "Question");
+                name: "PossibleAnswer");
 
             migrationBuilder.DropTable(
                 name: "User");
+
+            migrationBuilder.DropTable(
+                name: "Question");
         }
     }
 }

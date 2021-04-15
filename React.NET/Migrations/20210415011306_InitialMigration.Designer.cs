@@ -10,8 +10,8 @@ using React.NET.Entities;
 namespace React.NET.Migrations
 {
     [DbContext(typeof(QuizContext))]
-    [Migration("20210414235025_PossibleAnswersTable")]
-    partial class PossibleAnswersTable
+    [Migration("20210415011306_InitialMigration")]
+    partial class InitialMigration
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -20,26 +20,6 @@ namespace React.NET.Migrations
                 .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn)
                 .HasAnnotation("ProductVersion", "3.1.0")
                 .HasAnnotation("Relational:MaxIdentifierLength", 63);
-
-            modelBuilder.Entity("React.NET.Entities.Answer", b =>
-                {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uuid");
-
-                    b.Property<string>("AnswerText")
-                        .HasColumnType("character varying(500)")
-                        .HasMaxLength(500);
-
-                    b.Property<Guid>("QuestionId")
-                        .HasColumnType("uuid");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("QuestionId");
-
-                    b.ToTable("Answer");
-                });
 
             modelBuilder.Entity("React.NET.Entities.Entry", b =>
                 {
@@ -70,6 +50,9 @@ namespace React.NET.Migrations
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uuid");
+
+                    b.Property<bool>("Answer")
+                        .HasColumnType("boolean");
 
                     b.Property<string>("PossibleAnswerText")
                         .HasColumnType("text");
@@ -119,15 +102,6 @@ namespace React.NET.Migrations
                     b.ToTable("User");
                 });
 
-            modelBuilder.Entity("React.NET.Entities.Answer", b =>
-                {
-                    b.HasOne("React.NET.Entities.Question", "Question")
-                        .WithMany("Answers")
-                        .HasForeignKey("QuestionId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-                });
-
             modelBuilder.Entity("React.NET.Entities.Entry", b =>
                 {
                     b.HasOne("React.NET.Entities.Question", "Question")
@@ -146,7 +120,7 @@ namespace React.NET.Migrations
             modelBuilder.Entity("React.NET.Entities.PossibleAnswer", b =>
                 {
                     b.HasOne("React.NET.Entities.Question", "Question")
-                        .WithMany()
+                        .WithMany("PossibleAnswers")
                         .HasForeignKey("QuestionId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();

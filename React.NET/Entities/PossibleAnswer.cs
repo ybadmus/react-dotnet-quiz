@@ -18,5 +18,7 @@ namespace React.NET.Entities
         public Guid QuestionId { get; set; }
 
         public string PossibleAnswerText { get; set; }
+
+        public bool Answer { get; set; }
     }
 }
