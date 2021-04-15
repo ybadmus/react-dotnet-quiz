@@ -71,6 +71,14 @@ namespace React.NET
                     pattern: "{controller}/{action=Index}/{id?}");
             });
 
+            AutoMapper.Mapper.Initialize(cfg =>
+            {
+                //AutoMapper.Mapper.CreateMap<SourceClass, DestinationClass>();
+                cfg.CreateMap<Entities.Question, Models.QuestionForCreationDto>();
+                   
+            });
+
+
             quizContext.EnsureSeedDataForContext();
 
             app.UseSpa(spa =>

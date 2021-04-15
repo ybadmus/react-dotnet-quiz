@@ -14,6 +14,7 @@ namespace React.NET.Services
         void DeleteAnswer(PossibleAnswer answer);
         Question GetQuestion(Guid questionId);
         PagedList<Question> GetQuestions(QuestionsResourceParameters questionsResourceParameters);
+        IEnumerable<Question> GetQuestionsWithListOfId(IEnumerable<Guid> questionIds);
         PossibleAnswer GetAnswerForQuestion(Guid questionId, Guid answerId);
         IEnumerable<PossibleAnswer> GetPossibleAnswersForQuestion(Guid questionId);
         void SaveUserEntryForQuestion(Entry entry);

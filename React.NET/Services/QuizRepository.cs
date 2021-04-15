@@ -17,7 +17,11 @@ namespace React.NET.Services
 
         public void AddQuestion(Question question)
         {
-            question.Id = Guid.NewGuid();
+            if (question.Id == null)
+            {
+                question.Id = Guid.NewGuid();
+
+            }
             _context.Questions.Add(question);
 
             if (question.PossibleAnswers.Any())
@@ -90,7 +94,7 @@ namespace React.NET.Services
                 questionsResourceParameters.PageSize);
         }
 
-        public IEnumerable<Question> GetQuestions(IEnumerable<Guid> questionIds)
+        public IEnumerable<Question> GetQuestionsWithListOfId(IEnumerable<Guid> questionIds)
         {
             return _context.Questions.Where(a => questionIds.Contains(a.Id)).ToList();
         }
