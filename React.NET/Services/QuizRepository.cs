@@ -71,15 +71,6 @@ namespace React.NET.Services
             var collectionBeforePaging =
                 _context.Questions.AsQueryable();
 
-            if (!string.IsNullOrEmpty(questionsResourceParameters.QuestionText))
-            {
-                var questionForWhereClause = questionsResourceParameters.QuestionText
-                    .Trim().ToLowerInvariant();
-
-                collectionBeforePaging = collectionBeforePaging
-                    .Where(a => a.QuestionText.ToLowerInvariant() == questionForWhereClause);
-            }
-
             if (!string.IsNullOrEmpty(questionsResourceParameters.SearchQuery))
             {
                 var searchQueryForWhereClause = questionsResourceParameters.SearchQuery
