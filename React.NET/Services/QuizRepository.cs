@@ -110,7 +110,7 @@ namespace React.NET.Services
                         .Where(b => b.QuestionId == questionId && b.Answer).ToList();
         }
 
-        public void SaveUserEntryForQuestion(Entry entry)
+        public void SaveEntryForQuestion(Entry entry)
         {
             if (entry.Id == null)
             {

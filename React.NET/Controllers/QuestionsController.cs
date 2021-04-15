@@ -121,7 +121,7 @@ namespace React.NET.Controllers
 
             if (!_quizRepository.Save())
             {
-                throw new Exception("Creating an author failed on save.");
+                throw new Exception("Creating an question failed on save.");
             }
 
             var questionToReturn = Mapper.Map<QuestionDto>(questionEntity);

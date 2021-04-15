@@ -38,7 +38,7 @@ namespace React.NET.Controllers
 
             if (!_quizRepository.Save())
             {
-                throw new Exception("Creating an author collection failed on save.");
+                throw new Exception("Creating an questions collection failed on save.");
             }
 
             return Ok();

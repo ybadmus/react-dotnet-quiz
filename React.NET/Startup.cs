@@ -73,12 +73,12 @@ namespace React.NET
 
             AutoMapper.Mapper.Initialize(cfg =>
             {
-                //cfg.CreateMap<Models.QuestionDto, Entities.Question>();
+                //cfg.CreateMap<SOURCE, DESTINATION>();
                 cfg.CreateMap<Entities.Question, Models.QuestionDto>();
                 cfg.CreateMap<Models.QuestionForCreationDto, Entities.Question>();
                 cfg.CreateMap<Entities.PossibleAnswer, Models.PossibleAnswerDto>();
+                cfg.CreateMap<Models.EntryForCreationDto, Entities.Entry>();
             });
-
 
             quizContext.EnsureSeedDataForContext();
 
