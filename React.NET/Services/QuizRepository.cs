@@ -1,5 +1,6 @@
 ﻿using React.NET.Entities;
 using React.NET.Helpers;
+using React.NET.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -135,10 +136,17 @@ namespace React.NET.Services
                 .Where(u => u.Username == username).FirstOrDefault().Id;
         }
 
-        public int CalculateScoreForQuiz(Guid userId)
+        public UserScoreDto CalculateScoreForQuiz(Guid userId)
         {
             var entriesFromRepo = _context.Entries.Where(b => b.UserId == userId).Select(b => b.Correct);
-            return entriesFromRepo.Count();
+            var username = _context.Users.Where(u => u.Id == userId).FirstOrDefault().Username;
+            var score = new UserScoreDto()
+            {
+                Username = username,
+                Score = entriesFromRepo.Count()
+            };
+
+            return score;
         }
 
         public bool Save()

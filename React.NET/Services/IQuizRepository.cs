@@ -1,5 +1,6 @@
 ﻿using React.NET.Entities;
 using React.NET.Helpers;
+using React.NET.Models;
 using System;
 using System.Collections.Generic;
 
@@ -20,7 +21,7 @@ namespace React.NET.Services
         IEnumerable<PossibleAnswer> GetAnswersForQuestion(Guid questionId);
         void SaveEntryForQuestion(Entry entry);
         Guid CreateUser(User user);
-        int CalculateScoreForQuiz(Guid userId);
+        UserScoreDto CalculateScoreForQuiz(Guid userId);
         bool Save();
     }
 }
