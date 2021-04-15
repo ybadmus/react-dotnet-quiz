@@ -29,11 +29,11 @@ namespace React.NET.Controllers
                 return BadRequest();
             }
 
-            var authorEntities = Mapper.Map<IEnumerable<Question>>(questionCollection);
+            var questionEntities = Mapper.Map<IEnumerable<Question>>(questionCollection);
 
-            foreach (var author in authorEntities)
+            foreach (var question in questionEntities)
             {
-                _quizRepository.AddQuestion(author);
+                _quizRepository.AddQuestion(question);
             }
 
             if (!_quizRepository.Save())
@@ -59,8 +59,8 @@ namespace React.NET.Controllers
                 return NotFound();
             }
 
-            var authorsToReturn = Mapper.Map<IEnumerable<QuestionDto>>(questionEntities);
-            return Ok(authorsToReturn);
+            var questionsToReturn = Mapper.Map<IEnumerable<QuestionDto>>(questionEntities);
+            return Ok(questionsToReturn);
         }
     }
 }

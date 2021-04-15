@@ -30,11 +30,11 @@ namespace React.NET.Controllers
             var questionsFromRepo = _quizRepository.GetQuestions(questionsResourceParameters);
 
             var previousPageLink = questionsFromRepo.HasPrevious ?
-                    CreateAuthorsResourceUri(questionsResourceParameters,
+                    CreateQuestionsResourceUri(questionsResourceParameters,
                     ResourceUriType.PreviousPage) : null;
 
             var nextPageLink = questionsFromRepo.HasNext ?
-                CreateAuthorsResourceUri(questionsResourceParameters,
+                CreateQuestionsResourceUri(questionsResourceParameters,
                 ResourceUriType.NextPage) : null;
 
             var paginationMetadata = new
@@ -50,12 +50,12 @@ namespace React.NET.Controllers
             Response.Headers.Add("X-Pagination",
                 Newtonsoft.Json.JsonConvert.SerializeObject(paginationMetadata));
 
-            var authors = Mapper.Map<IEnumerable<QuestionDto>>(questionsFromRepo);
-            return Ok(authors);
+            var questions = Mapper.Map<IEnumerable<QuestionDto>>(questionsFromRepo);
+            return Ok(questions);
         }
 
-        private string CreateAuthorsResourceUri(
-            QuestionsResourceParameters authorsResourceParameters,
+        private string CreateQuestionsResourceUri(
+            QuestionsResourceParameters questionsResourceParameters,
             ResourceUriType type)
         {
             switch (type)
@@ -64,26 +64,26 @@ namespace React.NET.Controllers
                     return _urlHelper.Link("GetAllQuestions",
                       new
                       {
-                          searchQuery = authorsResourceParameters.SearchQuery,
-                          pageNumber = authorsResourceParameters.PageNumber - 1,
-                          pageSize = authorsResourceParameters.PageSize
+                          searchQuery = questionsResourceParameters.SearchQuery,
+                          pageNumber = questionsResourceParameters.PageNumber - 1,
+                          pageSize = questionsResourceParameters.PageSize
                       });
                 case ResourceUriType.NextPage:
                     return _urlHelper.Link("GetAllQuestions",
                       new
                       {
-                          searchQuery = authorsResourceParameters.SearchQuery,
-                          pageNumber = authorsResourceParameters.PageNumber + 1,
-                          pageSize = authorsResourceParameters.PageSize
+                          searchQuery = questionsResourceParameters.SearchQuery,
+                          pageNumber = questionsResourceParameters.PageNumber + 1,
+                          pageSize = questionsResourceParameters.PageSize
                       });
 
                 default:
                     return _urlHelper.Link("GetAllQuestions",
                     new
                     {
-                        searchQuery = authorsResourceParameters.SearchQuery,
-                        pageNumber = authorsResourceParameters.PageNumber,
-                        pageSize = authorsResourceParameters.PageSize
+                        searchQuery = questionsResourceParameters.SearchQuery,
+                        pageNumber = questionsResourceParameters.PageNumber,
+                        pageSize = questionsResourceParameters.PageSize
                     });
             }
         }

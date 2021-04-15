@@ -73,7 +73,6 @@ namespace React.NET
 
             AutoMapper.Mapper.Initialize(cfg =>
             {
-                //cfg.CreateMap<SOURCE, DESTINATION>();
                 cfg.CreateMap<Entities.Question, Models.QuestionDto>();
                 cfg.CreateMap<Models.QuestionForCreationDto, Entities.Question>();
                 cfg.CreateMap<Entities.PossibleAnswer, Models.PossibleAnswerDto>();
