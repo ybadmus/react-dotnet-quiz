@@ -45,5 +45,28 @@ namespace React.NET.Controllers
             var answers = Mapper.Map<IEnumerable<PossibleAnswerDto>>(answersFromRepo);
             return Ok(answers);
         }
+
+        [HttpGet("GetPossibleAnswersAndAnswers", Name = "GetPossibleAnswersAndAnswers")]
+        public IActionResult GetPossibleAnswersAndAnswers(Guid questionId)
+        {
+            var possibleAnswersFromRepo = _quizRepository.GetPossibleAnswersForQuestion(questionId);
+            var answersFromRepo = _quizRepository.GetAnswersForQuestion(questionId);
+
+            if (answersFromRepo == null && possibleAnswersFromRepo == null)
+            {
+                return NotFound();
+            }
+
+            var possibleAnswers = Mapper.Map<IEnumerable<PossibleAnswerDto>>(possibleAnswersFromRepo);
+            var answers = Mapper.Map<IEnumerable<PossibleAnswerDto>>(answersFromRepo);
+
+            var possibleAnswersAndAnswersObj = new PossibleAnswersAndAnswersDto()
+            {
+                PossibleAnswers = possibleAnswers,
+                Answers = answers
+            };
+
+            return Ok(possibleAnswersAndAnswersObj);
+        }
     }
 }
