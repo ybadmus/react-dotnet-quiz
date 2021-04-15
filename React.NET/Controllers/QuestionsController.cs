@@ -25,16 +25,16 @@ namespace React.NET.Controllers
         }
 
         [HttpGet("GetQuestions", Name = "GetQuestions")]
-        public IActionResult GetQuestions(QuestionsResourceParameters authorsResourceParameters)
+        public IActionResult GetQuestions(QuestionsResourceParameters questionsResourceParameters)
         {
-            var questionsFromRepo = _quizRepository.GetQuestions(authorsResourceParameters);
+            var questionsFromRepo = _quizRepository.GetQuestions(questionsResourceParameters);
 
             var previousPageLink = questionsFromRepo.HasPrevious ?
-                    CreateAuthorsResourceUri(authorsResourceParameters,
+                    CreateAuthorsResourceUri(questionsResourceParameters,
                     ResourceUriType.PreviousPage) : null;
 
             var nextPageLink = questionsFromRepo.HasNext ?
-                CreateAuthorsResourceUri(authorsResourceParameters,
+                CreateAuthorsResourceUri(questionsResourceParameters,
                 ResourceUriType.NextPage) : null;
 
             var paginationMetadata = new

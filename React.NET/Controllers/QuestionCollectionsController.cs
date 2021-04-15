@@ -21,8 +21,8 @@ namespace React.NET.Controllers
             _quizRepository = quizRepository;
         }
 
-        [HttpPost("CreateAuthorCollection", Name = "CreateAuthorCollection")]
-        public IActionResult CreateAuthorCollection([FromBody] IEnumerable<QuestionForCreationDto> questionCollection)
+        [HttpPost("CreateQuestionCollection", Name = "CreateQuestionCollection")]
+        public IActionResult CreateQuestionCollection([FromBody] IEnumerable<QuestionForCreationDto> questionCollection)
         {
             if (questionCollection == null)
             {
@@ -44,8 +44,8 @@ namespace React.NET.Controllers
             return Ok();
         }
 
-        [HttpGet("GetAuthorCollection", Name = "GetAuthorCollection")]
-        public IActionResult GetAuthorCollection([ModelBinder(BinderType = typeof(ArrayModelBinder))] IEnumerable<Guid> ids)
+        [HttpGet("GetQuestionCollection", Name = "GetQuestionCollection")]
+        public IActionResult GetQuestionCollection([ModelBinder(BinderType = typeof(ArrayModelBinder))] IEnumerable<Guid> ids)
         {           
             if (ids == null)
             {
