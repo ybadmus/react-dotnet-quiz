@@ -22,16 +22,23 @@ namespace React.NET.Controllers
         [HttpPost("CreateUser", Name = "CreateUser")]
         public IActionResult CreateUser([FromBody] UserForCreationDto username)
         {
-            var repoUser = Mapper.Map<User>(username);
+            var userFromRepo = Mapper.Map<User>(username);
 
-            _quizRepository.CreateUser(repoUser);
+            var userId = _quizRepository.CreateUser(userFromRepo);
 
             if (!_quizRepository.Save())
             {
                 throw new Exception($"Creating user failed on save.");
             }
 
-            return Ok();
+            return Ok(userId);
+        }
+
+        [HttpGet("GetScores", Name = "GetScores")]
+        public IActionResult GetScores(Guid userId)
+        {
+            var scoreFromRepo = _quizRepository.CalculateScoreForQuiz(userId);
+            return Ok(scoreFromRepo);
         }
     }
 }
