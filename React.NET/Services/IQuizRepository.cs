@@ -17,6 +17,7 @@ namespace React.NET.Services
         IEnumerable<Question> GetQuestionsWithListOfId(IEnumerable<Guid> questionIds);
         PossibleAnswer GetAnswerForQuestion(Guid questionId, Guid answerId);
         IEnumerable<PossibleAnswer> GetPossibleAnswersForQuestion(Guid questionId);
+        IEnumerable<PossibleAnswer> GetAnswersForQuestion(Guid questionId);
         void SaveUserEntryForQuestion(Entry entry);
         Guid CreateNewUser(User user);
         int CalculateScoreForQuiz(Guid userId);
