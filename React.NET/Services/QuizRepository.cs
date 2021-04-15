@@ -71,6 +71,7 @@ namespace React.NET.Services
             {
                 var questionForWhereClause = questionsResourceParameters.QuestionText
                     .Trim().ToLowerInvariant();
+
                 collectionBeforePaging = collectionBeforePaging
                     .Where(a => a.QuestionText.ToLowerInvariant() == questionForWhereClause);
             }
@@ -89,6 +90,11 @@ namespace React.NET.Services
                 questionsResourceParameters.PageSize);
         }
 
+        public IEnumerable<Question> GetQuestions(IEnumerable<Guid> questionIds)
+        {
+            return _context.Questions.Where(a => questionIds.Contains(a.Id)).ToList();
+        }
+
         public PossibleAnswer GetAnswerForQuestion(Guid questionId, Guid answerId)
         {
             var PossibleAnswers = _context.PossibleAnswers
@@ -101,6 +107,12 @@ namespace React.NET.Services
         {
             return _context.PossibleAnswers
                         .Where(b => b.QuestionId == questionId).ToList();
+        }
+
+        public IEnumerable<PossibleAnswer> GetAnswersForQuestion(Guid questionId)
+        {
+            return _context.PossibleAnswers
+                        .Where(b => b.QuestionId == questionId && b.Answer).ToList();
         }
 
         public void SaveUserEntryForQuestion(Entry entry)
