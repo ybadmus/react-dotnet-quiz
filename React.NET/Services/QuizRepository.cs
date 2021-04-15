@@ -121,7 +121,10 @@ namespace React.NET.Services
 
         public Guid CreateNewUser(User user)
         {
-            user.Id = Guid.NewGuid();
+            if (user.Id == null)
+            {
+                user.Id = Guid.NewGuid();
+            }
             _context.Users.Add(user);
             return user.Id;
         }
@@ -134,8 +137,8 @@ namespace React.NET.Services
 
         public int CalculateScoreForQuiz(Guid userId)
         {
-            var entries = _context.Entries.Where(b => b.UserId == userId).Select(b => b.Correct);
-            return entries.Count();
+            var entriesFromRepo = _context.Entries.Where(b => b.UserId == userId).Select(b => b.Correct);
+            return entriesFromRepo.Count();
         }
 
         public bool Save()

@@ -22,9 +22,9 @@ namespace React.NET.Entities
             modelBuilder.Entity<Question>().ToTable("Question");
             modelBuilder.Entity<PossibleAnswer>().ToTable("PossibleAnswer");
 
-            modelBuilder.Entity<User>()
-                .HasIndex(u => u.Username)
-                .IsUnique();
+            //modelBuilder.Entity<User>()
+            //    .HasIndex(u => u.Username)
+            //    .IsUnique();
         }
     }
 }
