@@ -10,6 +10,5 @@ namespace React.NET.Models
         public Guid Id { get; set; }
         public Guid QuestionId { get; set; }
         public string PossibleAnswerText { get; set; }
-        public bool Answer { get; set; }
     }
 }
