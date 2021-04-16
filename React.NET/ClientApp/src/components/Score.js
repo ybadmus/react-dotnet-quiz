@@ -26,7 +26,7 @@ export class Score extends Component {
                 });
             })
             .catch((error) => {
-                console.error('Error:', error);
+                alert('Error:', error);
             });
     }
 
@@ -43,8 +43,8 @@ export class Score extends Component {
     render() {
         return (
             <div className="score">
-                <h1>Your score: {this.state.username}</h1>
-                <strong>{this.state.score}</strong>
+                <h1>Name: {this.state.username}</h1>
+                <strong>Score: {this.state.score} %</strong>
             </div>
         );
     }

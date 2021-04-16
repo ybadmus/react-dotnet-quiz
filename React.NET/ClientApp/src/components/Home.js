@@ -38,18 +38,17 @@ export class Home extends Component {
         this.postData('api/users/createuser', { username: username })
             .then(data => {
                 window.sessionStorage.setItem("userId", data);
-                console.log('sessionStorage:', window.sessionStorage.getItem("userId"));
                 this.props.history.push('/quiz');
             })
             .catch((error) => {
-                console.error('Error:', error);
+                alert('Error:', error);
             });
     }
 
     render() {
         return (
             <div className="login">
-                <h1>Login to Web App</h1>
+                <h1>Login to Quiz App</h1>
                 <form onSubmit={this.handleSubmit}>
                     <p><input type="text" value={this.state.value} onChange={this.handleChange} placeholder="Username or Email" /></p>
                     <p className="submit"><input type="submit" name="commit" value="Login" /></p>
