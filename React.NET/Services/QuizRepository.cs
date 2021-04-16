@@ -138,13 +138,15 @@ namespace React.NET.Services
 
         public UserScoreDto CalculateScoreForQuiz(Guid userId)
         {
-            var entriesFromRepo = _context.Entries.Where(b => b.UserId == userId).Select(b => b.Correct);
-            var username = _context.Users.Where(u => u.Id == userId).FirstOrDefault().Username;
-            var score = new UserScoreDto()
-            {
-                Username = username,
-                Score = entriesFromRepo.Count()
-            };
+            var score = new UserScoreDto();
+            if(userId != Guid.Empty) {
+                var entriesFromRepo = _context.Entries.Where(b => b.UserId == userId).Select(b => b.Correct);
+                var username = _context.Users.Where(u => u.Id == userId).FirstOrDefault().Username;
+                score.Username = username;
+                score.Score = entriesFromRepo.Count();
+
+                return score;
+            }
 
             return score;
         }
