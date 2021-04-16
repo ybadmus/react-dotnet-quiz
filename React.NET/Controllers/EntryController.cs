@@ -20,11 +20,9 @@ namespace React.NET.Controllers
         }
 
         [HttpPost("SaveEntry", Name = "SaveEntry")]
-        public IActionResult SaveEntry([FromBody]EntryForCreationDto entry)
+        public IActionResult SaveEntry([FromBody]UserSelectionsForCreationDto entry)
         {
-            var repoEntry = Mapper.Map<Entry>(entry);
-
-            _quizRepository.SaveEntryForQuestion(repoEntry);
+            _quizRepository.SaveEntryForQuestion(entry);
 
             if (!_quizRepository.Save())
             {

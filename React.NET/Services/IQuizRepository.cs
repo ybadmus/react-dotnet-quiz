@@ -19,7 +19,7 @@ namespace React.NET.Services
         PossibleAnswer GetAnswerForQuestion(Guid questionId, Guid answerId);
         IEnumerable<PossibleAnswer> GetPossibleAnswersForQuestion(Guid questionId);
         IEnumerable<PossibleAnswer> GetAnswersForQuestion(Guid questionId);
-        void SaveEntryForQuestion(Entry entry);
+        void SaveEntryForQuestion(UserSelectionsForCreationDto selection);
         Guid CreateUser(User user);
         UserScoreDto CalculateScoreForQuiz(Guid userId);
         bool Save();
