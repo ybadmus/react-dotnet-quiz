@@ -1,4 +1,5 @@
-﻿using React.NET.Entities;
+﻿using Microsoft.Extensions.Configuration;
+using React.NET.Entities;
 using React.NET.Helpers;
 using React.NET.Models;
 using System;
@@ -10,10 +11,12 @@ namespace React.NET.Services
     public class QuizRepository : IQuizRepository
     {
         private QuizContext _context;
+        public IConfiguration Configuration { get; }
 
-        public QuizRepository(QuizContext context)
+        public QuizRepository(QuizContext context, IConfiguration configuration)
         {
             _context = context;
+            Configuration = configuration;
         }
 
         public void AddQuestion(Question question)
@@ -117,6 +120,15 @@ namespace React.NET.Services
             {
                 entry.Id = Guid.NewGuid();
             }
+
+            var noUserEntries = _context.Entries.Where(u => u.UserId == entry.UserId).ToList().Count();
+
+            if (noUserEntries >= Convert.ToInt32(Configuration.GetConnectionString("totalNoOfQuizes")))
+            {
+                throw new Exception($"Total number of entry for user exceeded");
+
+            }
+
             _context.Entries.Add(entry);
         }
 
@@ -143,7 +155,7 @@ namespace React.NET.Services
                 var entriesFromRepo = _context.Entries.Where(b => b.UserId == userId).Select(b => b.Correct);
                 var username = _context.Users.Where(u => u.Id == userId).FirstOrDefault().Username;
                 score.Username = username;
-                score.Score = entriesFromRepo.Count();
+                score.Score =  ((Decimal)entriesFromRepo.Count() / Convert.ToDecimal(Configuration.GetConnectionString("totalNoOfQuizes"))) * 100;
 
                 return score;
             }
