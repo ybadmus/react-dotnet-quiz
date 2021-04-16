@@ -114,14 +114,9 @@ namespace React.NET.Services
                         .Where(b => b.QuestionId == questionId && b.Answer).ToList();
         }
 
-        public void SaveEntryForQuestion(Entry entry)
+        public void SaveEntryForQuestion(UserSelectionsForCreationDto selection)
         {
-            if (entry.Id == null)
-            {
-                entry.Id = Guid.NewGuid();
-            }
-
-            var noUserEntries = _context.Entries.Where(u => u.UserId == entry.UserId).ToList().Count();
+            var noUserEntries = _context.Entries.Where(u => u.UserId == selection.UserId).ToList().Count();
 
             if (noUserEntries >= Convert.ToInt32(Configuration.GetConnectionString("totalNoOfQuizes")))
             {
@@ -129,7 +124,22 @@ namespace React.NET.Services
 
             }
 
+            var isUserSelectionCorrect = CheckEntryForUser(selection.Selection);
+
+            var entry = new Entry()
+            {
+                Id = Guid.NewGuid(),
+                QuestionId = selection.QuestionId,
+                UserId = selection.UserId,
+                Correct = isUserSelectionCorrect
+            };
+
             _context.Entries.Add(entry);
+        }
+
+        private bool CheckEntryForUser(IEnumerable<PossibleAnswerDto> selection)
+        {
+            return false;
         }
 
         public Guid CreateUser(User user)
