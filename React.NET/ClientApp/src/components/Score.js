@@ -14,7 +14,7 @@ export class Score extends Component {
     }
 
     validateUser() {
-        if (window.sessionStorage.getItem("userId").trim() === "" || window.sessionStorage.getItem("userId").trim() === null) {
+        if (window.sessionStorage.getItem("userId") === "" || window.sessionStorage.getItem("userId") === null) {
             return this.props.history.push('/');
         } else {
             this.getScore();

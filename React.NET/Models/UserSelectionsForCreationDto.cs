@@ -7,7 +7,7 @@ namespace React.NET.Models
 {
     public class UserSelectionsForCreationDto
     {
-        public IEnumerable<PossibleAnswerDto> Selection{ get; set; }
+        public ICollection<Guid> Selection{ get; set; }
         public Guid QuestionId { get; set; }
         public Guid UserId { get; set; }
     }

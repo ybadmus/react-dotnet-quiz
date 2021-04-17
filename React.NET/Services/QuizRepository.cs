@@ -1,4 +1,5 @@
-﻿using Microsoft.Extensions.Configuration;
+﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Configuration;
 using React.NET.Entities;
 using React.NET.Helpers;
 using React.NET.Models;
@@ -121,7 +122,7 @@ namespace React.NET.Services
                         .Where(b => b.QuestionId == questionId && b.Answer).ToList();
         }
 
-        public void SaveEntryForQuestion(UserSelectionsForCreationDto selection)
+        public bool SaveEntryForQuestion([FromBody]UserSelectionsForCreationDto selection)
         {
             var noUserEntries = _context.Entries.Where(u => u.UserId == selection.UserId).ToList().Count();
 
@@ -131,7 +132,7 @@ namespace React.NET.Services
 
             }
 
-            var isUserSelectionCorrect = CheckEntryForUser(selection.Selection);
+            var isUserSelectionCorrect = CheckEntryForUser(selection.Selection, selection.QuestionId);
 
             var entry = new Entry()
             {
@@ -142,11 +143,37 @@ namespace React.NET.Services
             };
 
             _context.Entries.Add(entry);
+
+            return isUserSelectionCorrect;
         }
 
-        private bool CheckEntryForUser(IEnumerable<PossibleAnswerDto> selection)
+        private bool CheckEntryForUser(ICollection<Guid> selection, Guid questionId)
         {
-            return false;
+            var answers = _context.PossibleAnswers
+                        .Where(b => b.QuestionId == questionId && b.Answer).ToList();
+
+            List<Guid> answersList = new List<Guid>();
+
+            foreach(var answer in answers)
+            {
+                answersList.Add(answer.Id);
+            }
+
+            if (selection.Count > answersList.Count)
+            {
+                return false;
+            }
+
+            var result = answersList.Except(selection);
+
+            if (result.Count() == 0)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
         }
 
         public Guid CreateUser(User user)

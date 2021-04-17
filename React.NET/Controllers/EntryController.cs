@@ -22,14 +22,14 @@ namespace React.NET.Controllers
         [HttpPost("SaveEntry", Name = "SaveEntry")]
         public IActionResult SaveEntry([FromBody]UserSelectionsForCreationDto entry)
         {
-            _quizRepository.SaveEntryForQuestion(entry);
+            bool resp = _quizRepository.SaveEntryForQuestion(entry);
 
             if (!_quizRepository.Save())
             {
                 throw new Exception($"Creating entry failed on save.");
             }
 
-            return Ok();
+            return Ok(resp);
         }
     }
 }
