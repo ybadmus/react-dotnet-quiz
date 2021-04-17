@@ -102,6 +102,13 @@ namespace React.NET.Services
             return PossibleAnswers;
         }
 
+        public IEnumerable<PossibleAnswer> GetPossibleAnswers()
+        {
+            var PossibleAnswers = _context.PossibleAnswers.ToList();
+
+            return PossibleAnswers;
+        }
+
         public IEnumerable<PossibleAnswer> GetPossibleAnswersForQuestion(Guid questionId)
         {
             return _context.PossibleAnswers

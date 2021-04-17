@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import '../styles/login.css';
+import '../styles/score.css';
 
 export class Score extends Component {
 
@@ -10,8 +10,16 @@ export class Score extends Component {
     }
 
     componentDidMount() {
-        this.getScore();
+        this.validateUser();
     }
+
+    validateUser() {
+        if (window.sessionStorage.getItem("userId").trim() === "" || window.sessionStorage.getItem("userId").trim() === null) {
+            return this.props.history.push('/');
+        } else {
+            this.getScore();
+        }
+    };
 
     componentWillUnmount() {
         window.sessionStorage.setItem("userId", "");
@@ -26,7 +34,7 @@ export class Score extends Component {
                 });
             })
             .catch((error) => {
-                alert('Error:', error);
+                console.log('Error:', error);
             });
     }
 

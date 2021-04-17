@@ -41,7 +41,7 @@ export class Home extends Component {
                 this.props.history.push('/quiz');
             })
             .catch((error) => {
-                alert('Error:', error);
+                console.log('Error:', error);
             });
     }
 
