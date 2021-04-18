@@ -1,10 +1,10 @@
 # react-dotnet-quiz
 A quiz app for the web, users can sign up and go through quiz and get instant results - built with react and dotnet core 3.1. This app is built for lifekey.
 
-![screenshot](https://raw.githubusercontent.com/ybadmus/Github_Ranking_Scrapper/features/docs/Screenshot (105).png)
-![screenshot](https://raw.githubusercontent.com/ybadmus/Github_Ranking_Scrapper/features/docs/Screenshot (106).png)
-![screenshot](https://raw.githubusercontent.com/ybadmus/Github_Ranking_Scrapper/features/docs/Screenshot (107).png)
-![screenshot](https://raw.githubusercontent.com/ybadmus/Github_Ranking_Scrapper/features/docs/Database ER diagram (crow's foot).png)
+![screenshot](https://raw.githubusercontent.com/ybadmus/react-dotnet-quiz/Fullstack/docs/Screenshot (105).png)
+![screenshot](https://raw.githubusercontent.com/ybadmus/react-dotnet-quiz/Fullstack/docs/Screenshot (106).png)
+![screenshot](https://raw.githubusercontent.com/ybadmus/react-dotnet-quiz/Fullstack/docs/Screenshot (107).png)
+![screenshot](https://raw.githubusercontent.com/ybadmus/react-dotnet-quiz/Fullstack/docs/Database ER diagram (crow's foot).png)
 
 ## Getting Started
 
