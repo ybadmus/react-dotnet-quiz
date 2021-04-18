@@ -1,4 +1,6 @@
-﻿using React.NET.Entities;
+﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Configuration;
+using React.NET.Entities;
 using React.NET.Helpers;
 using React.NET.Models;
 using System;
@@ -10,10 +12,12 @@ namespace React.NET.Services
     public class QuizRepository : IQuizRepository
     {
         private QuizContext _context;
+        public IConfiguration Configuration { get; }
 
-        public QuizRepository(QuizContext context)
+        public QuizRepository(QuizContext context, IConfiguration configuration)
         {
             _context = context;
+            Configuration = configuration;
         }
 
         public void AddQuestion(Question question)
@@ -99,6 +103,13 @@ namespace React.NET.Services
             return PossibleAnswers;
         }
 
+        public IEnumerable<PossibleAnswer> GetPossibleAnswers()
+        {
+            var PossibleAnswers = _context.PossibleAnswers.ToList();
+
+            return PossibleAnswers;
+        }
+
         public IEnumerable<PossibleAnswer> GetPossibleAnswersForQuestion(Guid questionId)
         {
             return _context.PossibleAnswers
@@ -111,13 +122,58 @@ namespace React.NET.Services
                         .Where(b => b.QuestionId == questionId && b.Answer).ToList();
         }
 
-        public void SaveEntryForQuestion(Entry entry)
+        public bool SaveEntryForQuestion([FromBody]UserSelectionsForCreationDto selection)
         {
-            if (entry.Id == null)
+            var noUserEntries = _context.Entries.Where(u => u.UserId == selection.UserId).ToList().Count();
+
+            if (noUserEntries > Convert.ToInt32(Configuration.GetConnectionString("totalNoOfQuizes")))
             {
-                entry.Id = Guid.NewGuid();
+                throw new Exception($"Total number of entry for user exceeded");
+
             }
+
+            var isUserSelectionCorrect = CheckEntryForUser(selection.Selection, selection.QuestionId);
+
+            var entry = new Entry()
+            {
+                Id = Guid.NewGuid(),
+                QuestionId = selection.QuestionId,
+                UserId = selection.UserId,
+                Correct = isUserSelectionCorrect
+            };
+
             _context.Entries.Add(entry);
+
+            return isUserSelectionCorrect;
+        }
+
+        private bool CheckEntryForUser(ICollection<Guid> selection, Guid questionId)
+        {
+            var answers = _context.PossibleAnswers
+                        .Where(b => b.QuestionId == questionId && b.Answer).ToList();
+
+            List<Guid> answersList = new List<Guid>();
+
+            foreach(var answer in answers)
+            {
+                answersList.Add(answer.Id);
+            }
+
+            if (selection.Count > answersList.Count)
+            {
+                return false;
+            }
+
+            var result = answersList.Except(selection);
+
+            if (result.Count() == 0)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
         }
 
         public Guid CreateUser(User user)
@@ -138,13 +194,15 @@ namespace React.NET.Services
 
         public UserScoreDto CalculateScoreForQuiz(Guid userId)
         {
-            var entriesFromRepo = _context.Entries.Where(b => b.UserId == userId).Select(b => b.Correct);
-            var username = _context.Users.Where(u => u.Id == userId).FirstOrDefault().Username;
-            var score = new UserScoreDto()
-            {
-                Username = username,
-                Score = entriesFromRepo.Count()
-            };
+            var score = new UserScoreDto();
+            if(userId != Guid.Empty) {
+                var entriesFromRepo = _context.Entries.Where(b => b.UserId == userId && b.Correct);
+                var username = _context.Users.Where(u => u.Id == userId).FirstOrDefault().Username;
+                score.Username = username;
+                score.Score =  ((Decimal)entriesFromRepo.Count() / Convert.ToDecimal(Configuration.GetConnectionString("totalNoOfQuizes"))) * 100;
+
+                return score;
+            }
 
             return score;
         }

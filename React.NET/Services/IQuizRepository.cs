@@ -16,10 +16,11 @@ namespace React.NET.Services
         Question GetQuestion(Guid questionId);
         PagedList<Question> GetQuestions(QuestionsResourceParameters questionsResourceParameters);
         IEnumerable<Question> GetQuestionsWithListOfId(IEnumerable<Guid> questionIds);
+        IEnumerable<PossibleAnswer> GetPossibleAnswers();
         PossibleAnswer GetAnswerForQuestion(Guid questionId, Guid answerId);
         IEnumerable<PossibleAnswer> GetPossibleAnswersForQuestion(Guid questionId);
         IEnumerable<PossibleAnswer> GetAnswersForQuestion(Guid questionId);
-        void SaveEntryForQuestion(Entry entry);
+        bool SaveEntryForQuestion(UserSelectionsForCreationDto selection);
         Guid CreateUser(User user);
         UserScoreDto CalculateScoreForQuiz(Guid userId);
         bool Save();

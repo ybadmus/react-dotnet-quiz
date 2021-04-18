@@ -5,10 +5,10 @@ using System.Threading.Tasks;
 
 namespace React.NET.Models
 {
-    public class PossibleAnswerDto
+    public class UserSelectionsForCreationDto
     {
-        public Guid Id { get; set; }
+        public ICollection<Guid> Selection{ get; set; }
         public Guid QuestionId { get; set; }
-        public string PossibleAnswerText { get; set; }
+        public Guid UserId { get; set; }
     }
 }

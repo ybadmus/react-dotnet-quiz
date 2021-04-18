@@ -18,6 +18,20 @@ namespace React.NET.Controllers
             _quizRepository = quizRepository;
         }
 
+        [HttpGet("GetPossibleAnswers", Name = "GetPossibleAnswers")]
+        public IActionResult GetPossibleAnswers()
+        {
+            var possibleAnswersFromRepo = _quizRepository.GetPossibleAnswers();
+
+            if (possibleAnswersFromRepo == null)
+            {
+                return NotFound();
+            }
+
+            var possibleAnswers = Mapper.Map<IEnumerable<PossibleAnswerDto>>(possibleAnswersFromRepo);
+            return Ok(possibleAnswers);
+        }
+        
         [HttpGet("GetPossibleAnswersForQuestion", Name = "GetPossibleAnswersForQuestion")]
         public IActionResult GetPossibleAnswersForQuestion(Guid questionId)
         {
