@@ -5,7 +5,7 @@ A quiz app for the web, users can sign up and go through quiz and get instant re
 
 To get a local copy up and running follow these simple steps.
 
-- Go to the main page of the repo. "git clone https://github.com/ybadmus/Github_Ranking_Scrapper.git"
+- Go to the main page of the repo. "git clone https://github.com/ybadmus/react-dotnet-quiz.git"
 - Press the "Code" button and get the repo link.
 - Clone it using git.
 - Change directory 'cd' into the React.NET folder.
