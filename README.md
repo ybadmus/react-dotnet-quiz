@@ -1,16 +1,16 @@
 # react-dotnet-quiz
 A quiz app for the web, users can sign up and go through quiz and get instant results - built with react and dotnet core 3.1. This app is built for lifekey.
 
-![screenshot](https://raw.githubusercontent.com/ybadmus/Github_Ranking_Scrapper/features/docs/Screenshot (105).png)
-![screenshot](https://raw.githubusercontent.com/ybadmus/Github_Ranking_Scrapper/features/docs/Screenshot (106).png)
-![screenshot](https://raw.githubusercontent.com/ybadmus/Github_Ranking_Scrapper/features/docs/Screenshot (107).png)
-![screenshot](https://raw.githubusercontent.com/ybadmus/Github_Ranking_Scrapper/features/docs/Database ER diagram (crow's foot).png)
+![screenshot](https://raw.githubusercontent.com/ybadmus/react-dotnet-quiz/Fullstack/docs/Screenshot (105).png)
+![screenshot](https://raw.githubusercontent.com/ybadmus/react-dotnet-quiz/Fullstack/docs/Screenshot (106).png)
+![screenshot](https://raw.githubusercontent.com/ybadmus/react-dotnet-quiz/Fullstack/docs/Screenshot (107).png)
+![screenshot](https://raw.githubusercontent.com/ybadmus/react-dotnet-quiz/Fullstack/docs/Database ER diagram (crow's foot).png)
 
 ## Getting Started
 
 To get a local copy up and running follow these simple steps.
 
-- Go to the main page of the repo. "git clone https://github.com/ybadmus/Github_Ranking_Scrapper.git"
+- Go to the main page of the repo. "git clone https://github.com/ybadmus/react-dotnet-quiz.git"
 - Press the "Code" button and get the repo link.
 - Clone it using git.
 - Change directory 'cd' into the React.NET folder.
@@ -50,7 +50,7 @@ Before you continue, be sure that you have installed:
 - React, Reactstrap
 - Javascript
 
-## ?? Contributing
+## 🤝 Contributing
 
 Contributions, issues and feature requests are welcome!
 
@@ -72,11 +72,11 @@ Alternatively see the GitHub documentation on creating a pull request. Feel free
 
 ## Show your support
 
-Give a ?? if you like this project!
+Give a ⭐️ if you like this project!
 
 ## Authors
 
-?? **Yusuf A. Badmus**
+👤 **Yusuf A. Badmus**
 
 - GitHub: [@ybadmus](https://github.com/ybadmus)
 - LinkedIn: [@ybadmus](https://www.linkedin.com/in/ybadmus/)
@@ -85,7 +85,7 @@ Give a ?? if you like this project!
 
 LifeKeys Health
 
-## ?? License
+## 📝 License
 
 <p>This project is <a href="LICENSE">MIT</a> licensed.</p>
 
