@@ -1,5 +1,6 @@
 # react-dotnet-quiz
-A quiz app for the web, users can sign up and go through quiz and get instant results - built with react and dotnet core 3.1. This app is built for lifekey.
+
+A quiz app for the web, users can sign up and go through the quizzes and get instant results - built with React and .NET core 3.1. This app is built for lifekey's Fullstack .NET developer assessment.
 
 ## Getting Started
 
@@ -10,20 +11,20 @@ To get a local copy up and running follow these simple steps.
 - Clone it using git.
 - Change directory 'cd' into the React.NET folder.
 - Double click on the .sln file to open visual studio.
+- Go back to the React.NET folder and change directory to the ClientApp folder and open terminal.
+- Type 'npm start' to start react app server. (This is meant to help visual studio respond faster as it won't be responsible for bootstrapping the react server).
+- Close the browser running on port 3000 when it's done compiling.
 
- 
+
 ## Usage instructions
 
-- Change directory to the ClientApp folder and open terminal.
-- Type 'npm start' to start react app server. (This is meant to help visual studio respond faster as it won't be responsible for loading the react server).
 - Run the app in visual studio using start button on the toolbar.
-- Close the browser running on port 3000 and use the one running on the other port.
-- Type your preferred username into the textbox.
-- Quiz flow:
-- **(1) Click on an answer to select it.
-- **(2) Click on the selected answer if you wan to change your mind to deselect it.
-    - Go through the questions.
-    - Final score is displayed in percentage after user has answered all questions.
+- When the app load in the browser, type your preferred username into the textbox.
+- Quiz:
+- (1) Click on an answer to select it.
+- (2) Click on the selected answer if you wan to change your mind to deselect it.
+- Go through the questions.
+- Final score is displayed in percentage after user has answered all questions.
 
 
 ## Prerequisites
@@ -33,8 +34,8 @@ Before you continue, be sure that you have installed:
 - A Git GUI.
 - Visual Studio, .NET Core 3.1
 - NPM, React
-- Postgres/Sql Server
-- A keyboard to respond to the prompts.
+- Postgres or Sql Server
+- A keyboard to type in inputs.
 
 ## Built With
 
@@ -44,6 +45,7 @@ Before you continue, be sure that you have installed:
 - Postgres
 - React, Reactstrap
 - Javascript
+- IIS
 
 ## 🤝 Contributing
 
@@ -78,7 +80,7 @@ Give a ⭐️ if you like this project!
 
 ## Acknowledgments
 
-LifeKeys Health
+Lifekeys
 
 ## 📝 License
 
