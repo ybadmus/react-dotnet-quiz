@@ -126,7 +126,7 @@ namespace React.NET.Services
         {
             var noUserEntries = _context.Entries.Where(u => u.UserId == selection.UserId).ToList().Count();
 
-            if (noUserEntries >= Convert.ToInt32(Configuration.GetConnectionString("totalNoOfQuizes")))
+            if (noUserEntries > Convert.ToInt32(Configuration.GetConnectionString("totalNoOfQuizes")))
             {
                 throw new Exception($"Total number of entry for user exceeded");
 

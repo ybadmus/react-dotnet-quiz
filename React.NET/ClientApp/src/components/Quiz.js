@@ -18,10 +18,13 @@ export class Quiz extends Component {
     componentDidUpdate(prevProps, prevState) {
 
         // check if dataSource state is still empty
-        if (!prevState.selectedAnswers.length > this.state.selectedAnswers.length) {
+        // debugger;
+        if (this.state.possibleAnswers.length === 0) {
+            setTimeout(() => {
 
-            this.getQuestions();
-            this.getPossibleAnswers();
+                this.getQuestions();
+                this.getPossibleAnswers();
+            }, 400);
         }
     }
 
@@ -40,7 +43,7 @@ export class Quiz extends Component {
 
         if (window.sessionStorage.getItem("userId") === "" || window.sessionStorage.getItem("userId") === null) {
             return this.props.history.push('/');
-        } 
+        }
     };
 
     getQuestions() {
@@ -122,13 +125,26 @@ export class Quiz extends Component {
         this.postData('api/entry/saveentry', objToSend)
             .then(data => {
                 alert(data ? "Correct" : "Incorrect");
-                this.setState({ currentIndex: this.state.currentIndex + 1 });
+
+                this.setState(function (state, props) {
+                    return { currentIndex: this.state.currentIndex + 1 };
+                });
+
+                if (this.state.currentIndex + 1 > 10)
+                    this.props.history.push('/score');
+
             })
             .catch((error) => {
                 console.log('Error:', error);
             });
 
-        this.setState({ selectedAnswers: [] });
+        this.setState(function (state, props) {
+            return { selectedAnswers: [] };
+        });
+
+        this.setState(function (state, props) {
+            return { possibleAnswers: [] };
+        });
     }
 
     render() {
