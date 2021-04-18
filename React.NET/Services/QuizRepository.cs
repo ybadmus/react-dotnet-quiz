@@ -196,7 +196,7 @@ namespace React.NET.Services
         {
             var score = new UserScoreDto();
             if(userId != Guid.Empty) {
-                var entriesFromRepo = _context.Entries.Where(b => b.UserId == userId).Select(b => b.Correct);
+                var entriesFromRepo = _context.Entries.Where(b => b.UserId == userId && b.Correct);
                 var username = _context.Users.Where(u => u.Id == userId).FirstOrDefault().Username;
                 score.Username = username;
                 score.Score =  ((Decimal)entriesFromRepo.Count() / Convert.ToDecimal(Configuration.GetConnectionString("totalNoOfQuizes"))) * 100;
